@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>默认行为</title>
+</head>
+<body>
+	<div><a href="http://www.baidu.com">百度</a></div>
+	<div><a href="http://www.jd.com">京东</a></div>
+	<script>
+		 var links = document.querySelectorAll("a"); 
+
+		 Array.prototype.slice(links,0).forEach(function(item){
+		 	item.onclick = function(event){
+		 		alert(1);
+		 		event.preventDefault();
+		 	}
+		 })
+	</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>element</title>
+</head>
+<body>
+	<div id="one">
+		<div>one</div>
+		<div>two</div>
+		<p>three</p>
+		<h1>four</h1>
+		<ul class = "last" id = "zuihou">
+			<li>first</li>
+			<li>sencond</li>
+		</ul>
+	</div>
+	<script>
+		var one = document.body.children[0];
+		console.log(one);
+		console.log(one.firstElementChild);
+		console.log(one.lastElementChild.id);
+		console.log(one.lastElementChild.className);
+	</script>
+</body>
+</html>

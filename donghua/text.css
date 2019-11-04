@@ -1,0 +1,99 @@
+html body .big{
+	font:normal 12px "microsoft";
+	color: #333;
+	height: 100%;
+}
+body{
+	margin: 0;
+	/*overflow: hidden;*/
+}
+ul,p{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+a{
+	color: #333;
+	text-decoration: none;
+}
+.big{
+/*	height: 920px;*/
+	background-color: #ddffee;
+}
+.head{
+	height: 80px;
+	background-color: lightblue;
+	text-align: center;
+	line-height: 80px;
+	font-size: 26px;
+	font-weight: bolder;
+}
+.bottom{
+	height: 920px;
+	overflow: scroll;
+	
+}
+/*.bottom::after>.left{
+	display: block;
+	content: "";
+	clear: both;
+}
+.bottom .left{
+	float: left;
+	width: 120px;
+	height: 100%;
+	background-color: #ddffee;
+}*/
+/*.bottom .left>ul::after>li{
+	display: block;
+	content: "";
+	clear: both;
+}*/
+/*.bottom .left>ul{
+	border: 1px solid #fff;*/
+
+/*.bottom .left>ul>li{
+	float: left;
+	border: 1px solid #fff;
+	font-weight: bold;
+	font-size: 20px;
+	padding: 18px;
+}
+.bottom .left>ul>li:first-child{
+	padding: 18px 28px;
+}*/
+.bottom .right{
+	background-color: #fff;
+	height: 100%;
+	margin-left: 120px;
+	
+}
+.bottom .right>div>p{
+	height: 50px;
+	background-color: #ddd;
+	width: 600px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 20px;
+	margin:0 auto;
+/*	display: none;*/
+}
+/*.bottom>.left>ul:first-child>.bottom .right>div>p{
+	display: block;
+}*/
+.bottom .left{
+	position: absolute;
+}
+.bottom .left>ul{
+	display: flex;
+	flex-direction: column;
+	width: 120px;
+	height: 400px;
+	background-color: #ccc;
+}
+.bottom .left>ul>li{
+	flex: 1;
+	flex-shrink: 3;
+	border: 1px solid #fff;
+	padding: 20px;
+}

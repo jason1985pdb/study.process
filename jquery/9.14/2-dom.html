@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>dom操作</title>
+	<style>
+		.content{
+			border: 1px solid #ccc;
+		}
+		.content::after{
+			content: "";
+			display: block;
+			clear: both;
+		}
+		.content .one{
+			width: 100px;
+			height: 100px;
+			margin: 20px;
+			float: left;
+			background-color: #ddffee;
+		}
+		.wrapper{
+			border: 1px solid pink;
+			padding: 1em;
+		}
+		.wrapper::after{
+			content: "";
+			display: block;
+			clear: both;
+		}
+	</style>
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		$(function(){
+			$(".one")
+			.append("<span>hello</span>")
+			// $(".content").append("<div>hello</div>");
+			// $(".one").wrapAll("<div class=wrapper></div>");
+			// $(".one").wrapInner("<div class=wrapper></div>");
+		});
+	</script>
+</head>
+<body>
+	<div class="content">
+		<div class="one">one</div>
+		<div class="one">two</div>
+		<div class="one">three</div>
+	</div>
+</body>
+</html>

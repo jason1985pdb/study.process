@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue基础</title>
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<a href="">{{message}}</a>
+		<div v-if = "random>0.5">
+			<a href="">请登录</a>
+			没有密码？
+			<a href="">请注册</a>
+		</div>
+		<div v-else>
+			欢迎您,{{random}}
+		</div>
+	</div>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>姓名</th>
+					<th>编号</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="item in list">
+					<td>{{item.id}}</td>
+					<td>{{item.name}]</td>
+				</tr>
+			</tbody>
+		</table>
+		{{param}}
+		<form action="" v-on:submit.prevent="submitHandler">
+			用户名 <input type="text" v-model = "param.username">
+			密码 <input type="password" v-model = "param.password">
+			<input type="submit" value="登录">
+		</form>
+	</div>
+	<!-- <div id="one">
+		<p>{{message}}</p>
+	</div> -->
+</body>
+<script>
+	let vm = new Vue({
+		el:"#app",
+		data:{
+			message:"hello word",
+			random:Math.random(),
+			list:[{id:1,name:"jj"},{id:2,name:"pdb"}],
+			param:{}
+		},
+		methods:{
+			submitHandler(){
+				alert(1);
+			}
+		}
+	});
+	// let vm2 = new Vue({
+	// 	el:"#one",
+	// 	data:{
+	// 		message:"hello"
+	// 	}
+	// });
+</script>
+</html>

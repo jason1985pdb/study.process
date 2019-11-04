@@ -1,0 +1,14 @@
+
+div{
+width: 200px;
+height: 200px;
+border-radius: 50%;
+color: #333;
+background: #ddffee;
+}
+#two{
+color:red;
+text-align: center;
+line-height: 200px;
+}	
+

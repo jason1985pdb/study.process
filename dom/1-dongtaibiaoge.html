@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动态表格</title>
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+	<link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<style>
+		.btn{
+			display: inline-block;
+			padding: .5em 2em;
+			border-radius: 3px;
+			background-color: teal;
+			color: #fff;
+			cursor: pointer;
+			
+		}
+		.none{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="btn" id="btn_add">添加</div>
+	<div class="btn">批量添加</div>
+	<div class="btn">批量删除</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<td >编号</td>
+				<td width="200px">姓名</td>
+				<td >性别</td>
+				<td >手机</td>
+				<td >操作</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="none">
+				<td><input type="checkbox"></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="javascript:void(0)"  class="btn_del">删除</a>
+					<a href="">修改</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<script>
+		 var btn_add = document.getElementById("btn_add");
+		 var tbody = document.getElementsByTagName("tbody")[0];
+		 //为删除按钮绑定事件处理函数
+		 tbody.onclick = function(event){
+		 	// var target = event.target;
+		 	if(event.target.nodeName === "A"){
+		 		if(event.target.className === "btn_del")
+		 			tbody.removeChild(event.target.parentNode.parentNode)
+		 	}
+		 	// var target = event.target;
+		 	// console.log(target);
+		 	// if(target.nodeName){
+
+		 	// }
+		 }
+		 // var btn_dels = document.getElementsByClassName("btn_del");
+		 // //问删除按钮绑定事件处理函数
+
+		 //为添加按钮绑定事件处理函数
+		 btn_add.onclick = function(event){
+		 	var newTr = tbody.firstElementChild.cloneNode("true");
+		 	newTr.children[1].innerText = Math.random()*100;
+		 	newTr.className = "";
+		tbody.appendChild(newTr);
+		 } ;
+	</script>
+</body>
+</html>

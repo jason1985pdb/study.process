@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>axios在浏览器中的应用</title>
+	<script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.js"></script>
+</head>
+<script>
+	// axios({
+	// 	method:"get",
+	// 	url:"http://123.57.238.144:6677/customer/findAll"
+	// })
+	// .then((respose)=>{
+	// 	console.log(respose.data);
+	// })
+
+	axios({
+		url:"http://123.57.238.144:6677/customer/saveOrUpdate",
+		method:"post",
+		data:{
+			realname:"jj",
+			telephone:"191781873431"
+		},
+		headers:{
+			"Content-Type":"application/x-www-form-urlencoded"
+		},
+		transformRequest:[(data,headers)=>{
+			let q = "";
+			for(let key in data){
+				let val = data[key]
+				q+=(key+"="+val+"&")
+			}
+			return q.slice(0,q.length-1);
+		}]
+	})
+	.then((respose)=>{
+		console.log(respose.data);
+	})
+	.catch((error)=>{
+		console.log("error",error);
+	})
+</script>
+<body>
+	
+</body>
+</html>

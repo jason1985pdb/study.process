@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>产品管理</title>
+	<link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+	<script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
+</head>
+<style>
+	img{
+		width: 50px;
+		height: 50px;
+	}
+</style>
+<body>
+	<div id="product">
+		<h2>{{name}}</h2>
+		<form action="" class="form-inline" @submit.prevent="saveupdate">
+		<!-- 服务名称 -->
+			<div class="form-group">
+				<label for="">名称</label>
+				<input class="form-control" type="text" v-model="product.name">
+			</div>
+			<!-- 产品描述 -->
+			<div class="form-group">
+				<label for="">描述</label>
+				<input class="form-control" type="text" v-model="product.description">
+			</div>
+			<!-- 产品价格 -->
+			<div class="form-group">
+				<label for="">价格</label>
+				<input class="form-control" type="text" v-model="product.price">
+			</div>
+			<!-- 产品所属分类id -->
+			<div class="form-group">
+				<label for="">所属分类id</label>
+				<select class="form-control"  name="" id="" v-model="product.categoryId">
+					<option v-for="item in categoryId" :value="item.id">{{item.id}}</option>
+				</select>
+			</div>
+			<input class="btn btn-danger" type="submit" value="提交">
+		</form>
+		<table class="table table-hover">
+			<thead class="thead-light">
+				<tr>
+					<th>id</th>
+					<th>服务名称</th>
+					<th>描述</th>
+					<th>价格</th>
+					<th>状态</th>
+					<th>头像</th>
+					<th>所属分类id</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody v-for="item in products">
+				<tr>
+					<td><input type="checkbox" :value="item.id"></td>
+					<td>{{item.name}}</td>
+					<td>{{item.description}}</td>
+					<td>{{item.price}}</td>
+					<td>{{item.status}}</td>
+					<td><img :src="item.photo" alt=""></td>
+					<td>{{item.categoryId}}</td>
+					<td>
+						<a href="" @click.prevent="delproduct(item.id)">删除</a>
+						<a href="" @click.prevent="editproduct(item)">修改</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script>
+		axios.defaults.baseURL="http://123.57.238.144:6677";
+		axios.defaults.headers.common["Content-Type"]="application/x-www-form-urlencodede";
+		axios.defaults.transformRequest=[(data)=>{
+			let str="";
+			for(key in data){
+				let val = data[key];
+				str+=(key+"="+val+"&");
+			}
+			return str.slice(0,str.length-1);
+		}]
+		new Vue({
+			el:"#product",
+			data:{
+				name:"产品管理",
+				products:[],
+				product:{},
+				categoryId:[]
+			},
+			methods:{
+				initproduct(){
+					axios.get("/product/findAll")
+					.then((response)=>{
+						this.products = response.data.data;
+					})
+				},
+				initcategory(){
+					axios.get("/category/findAll")
+					.then((response)=>{
+						this.categoryId = response.data.data;
+					})
+				},
+				async delproduct(id){
+					let response = await axios.get("/product/deleteById",{params:{id}})
+					alert(response.data.message);
+					this.initproduct();
+				},
+				async saveupdate(){
+					let response = await axios.post("/product/saveOrUpdate",this.product)
+					alert(response.data.message);
+					this.product={};
+					this.initproduct();
+				},
+				editproduct(product){
+					this.product = product;
+				}
+			},
+			created(){
+				this.initproduct();
+				this.initcategory();
+			}
+		})
+	</script>
+</body>
+</html>

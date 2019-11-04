@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画圆</title>
+	<style>
+		.one{
+			width: 450px;
+			height: 450px;
+			background-color: black;
+			padding: 20px;
+		/*	animation-name: x;
+			animation-duration: 3s;*/
+		}
+		.big{
+			width: 400px;
+			height: 400px;
+			background-color: black;
+			border-radius: 50%;
+			border: 2px solid #fff;
+				animation-name: x;
+			animation-duration: 1s;
+		}
+		.low{
+			width: 200px;
+			height: 200px;
+			background-color: #333;
+			border-radius: 50%;
+			position: relative;
+			top: 100px;
+			left: 100px;
+			border: 4px solid #fff;
+			animation-name: y;
+			animation-duration:1s; 
+		}
+		.big:hover{
+			animation-play-state: paused;
+		}
+		.low:hover{
+			animation-play-state: running;
+		}
+	@keyframes x{
+		25%{
+			padding: 10px;
+			background-color: red;
+		}
+		50%{
+			padding: 30px;
+			background-color: yellow;
+		}
+		75%{
+			padding: 5px;
+			background-color: green;
+		}
+	}
+	@keyframes y{
+		25%{
+			padding: 30px;
+			background-color: black;
+		}
+		50%{
+			padding: 20px;
+			background-color: pink;
+		}
+		75%{
+			padding: 10px;
+			background-color: teal;
+		}
+	}
+	</style>
+</head>
+<body>
+	<div class="one">
+		<div class="big">
+		<div class="low"></div>
+	</div>
+	</div>
+	
+</body>
+</html>

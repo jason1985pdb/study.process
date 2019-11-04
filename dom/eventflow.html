@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件流</title>
+	<style>
+		div{
+			padding: 50px;
+			box-sizing: border-box;
+			border: 1px solid #ccc;
+		}
+		div#outer{
+			width : 400px;
+			height: 400px;
+			margin: 0 auto;
+		}
+		div#center,
+		div#inner{
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div id="outer">
+		<div id="center">
+			<div id="inner"></div>
+		</div>
+	</div>
+	<script>
+		var outer = document.getElementById("outer");
+		var center = document.getElementById("center");
+		var inner = document.getElementById("inner");
+
+		var handler = function(event){
+			//console.log(event.target);
+			//target值不会变
+
+			//法一运用this  
+			// console.log(this.id);
+			// alert(this.id);
+			// event.stopPropagation();
+
+			//法二 运用event.currentTarget
+			console.log(event.currentTarget.id);
+			alert(event.currentTarget.id);
+			event.stopPropagation();
+
+			//stopPropagation:阻止后面冒泡
+		};
+		outer.onclick = handler;
+		center.onclick = handler;
+		inner.onclick = handler;
+
+		// outer.onclick = function(){
+		// 	console.log("outer");
+		// }
+		// center.onclick = function(){
+		// 	console.log("center");
+		// }
+		// inner.onclick = function(){
+		// 	console.log("inner");
+		// }
+	</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>顾客管理</title>
+	<link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+	<script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.js"></script> 
+</head>
+<body>
+	<div id="customer">
+		<h2>{{name}}</h2>
+		{{customer}}
+		<form class="form-inline" action="" v-on:submit.prevent="submitHeadler">
+			<div class="form-group">
+				<label for="">姓名</label>
+				<input class="form-control" type="text" v-model="customer.realname">
+			</div>
+			<div class="form-group">
+				<label for="">手机</label>
+				<input class="form-control" type="text" v-model="customer.telephone">
+			</div>
+			<input class="btn btn-info" type="submit" value="提交">
+		</form>
+		    <table class="table">
+		    	<thead>
+		    		<tr>
+		    			<th>编号</th>
+		    			<th>姓名</th>
+		    			<th>手机号</th>
+		    			<th>状态</th>
+		    			<th>item</th>
+		    			<th>操作</th>
+		    		</tr>
+		    	</thead>
+				<tbody>
+					<tr v-for = "item in customers">
+						<td><input type="checkbox" v-bind:value="item.id"></td>
+						<td>{{item.realname}}</td>
+						<td>{{item.telephone}}</td>
+						<td>{{item.status}}</td>
+						<td>{{item}}</td>
+						<td>
+							<a href="" v-on:click.prevent = "deleteHandler(item.id)">删除</a>
+							<a href="" v-on:click.prevent = "editHandler(item)">修改</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>	
+	</div>
+</body>
+<script>
+	axios.defaults.headers.common["Content-Type"]="application/x-www-form-urlencoded";
+	axios.defaults.transformRequest = [(data)=>{
+		let str = "";
+		for(let key in data){
+			let val = data[key]
+			str+=(key+"="+val+"&")
+		}
+		return str.slice(0,str.length-1)
+	}]
+	new Vue({
+		el:"#customer",
+		data:{
+			name:"顾客管理",
+			customers:{},
+			customer:{}
+		},
+		methods:{
+			editHandler(customer){
+				this.customer = customer;
+			},
+			async submitHeadler(){
+				let responde = await axios.post("http://123.57.238.144:6677/customer/saveOrUpdate",this.customer)
+				console.log(this.customer);
+				console.log(responde);
+				alert(responde.data.message);
+				this.customer = {}; 
+				this.reloadData();
+			},
+			reloadData(){
+				axios.get("http:123.57.238.144:6677/customer/findAll")
+			.then((response)=>{
+				this.customers = response.data.data;
+			})
+		},
+			async deleteHandler(id){
+				let response = await axios.get("http://123.57.238.144:6677/customer/deleteById",{params:{id}});
+				alert(response.data.message,response.data.status);
+				this.reloadData()
+			}
+		},
+		created(){
+			this.reloadData();
+		}
+	})
+</script>
+</html>

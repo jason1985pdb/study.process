@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>间歇调用与超时调用</title>
+	<script>
+		var id = setInterval(function(){
+			console.log(Math.random());
+		},1000);
+		console.log("id" ,id);
+		window.onload = function(){
+			document.getElementById("btn_stop").onclick = function(){
+				clearInterval(id);
+			}
+		}
+	</script>
+</head>
+<body>
+	<botton id="btn_stop">停止</botton>
+</body>
+</html>

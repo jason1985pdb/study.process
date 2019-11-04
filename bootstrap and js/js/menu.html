@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>二级菜单</title>
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+	<link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<style>
+		ul{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		ul li{
+			line-height: 2em;
+		}
+		ul.menu-sub{
+			padding-left:2em;
+		}
+	</style>
+	<script>
+		$(function(){
+			$(".menu>.menu-item>div").click(function(){
+				$(this).parent().siblings().find("ul.menu-sub").collapse("hide");
+				$(this).next(".menu-sub").collapse("toggle");
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<!-- 导航 -->
+			<div class="col-sm-2">
+				<ul class="menu">
+					<li class="menu-item">
+						<div>基础设置</div>
+						<ul class="menu-sub collapse">
+							<li>权限设置</li>
+							<li>广告设置</li>
+						</ul>
+					</li>
+					<li class="menu-item">
+						<div>班牌管理</div>
+						<ul class="menu-sub collapse">
+							<li>班牌绑定</li>
+							<li>班牌列表</li>
+							<li>班牌告警</li>
+						</ul>
+					</li>
+					<li class="menu-item">
+						<div>校园文化</div>
+						<ul class="menu-sub collapse">
+							<li>校园风采</li>
+							<li>班级活动</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!-- /导航 -->
+			<!-- 内容 -->
+			<div class="col-sm-10">
+			内容
+			</div>
+			<!-- neir -->
+		</div>
+	</div>
+</body>
+</html>

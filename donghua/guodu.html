@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>过渡</title>
+	<style>
+		.box{
+			width: 100px;
+			height:100px;
+/*			background-color: #ddffee;*/
+			overflow: hidden;
+			border: 10px solid #ddffee;
+
+			transition-property: border;
+			/*border: 10px solid red;*/
+			/*transition-property: border;*/
+			transition-duration: 5s;
+		}
+		.box img{
+			font-size: 0;
+			transition-property: transform;
+			transition-duration: 3s;
+
+			
+		}
+		.box:hover > img{
+			transform: scale(2);
+		
+		}
+		.box:hover{
+			border: 10px solid pink;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		 <img src="./20.jpg" alt=""> 
+	</div>
+	
+</body>
+</html>

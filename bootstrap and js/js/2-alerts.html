@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>bootstrap组件-alerts</title>
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+	<link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.css" rel="stylesheet">
+	<link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="alert alert-danger alert-dismissable">
+			hello
+			<br>
+			你好，世界
+			<button class="close" data-dismiss="alert">&times;</button>
+		</div>
+		<div class="alert alert-danger alert-dismissable">
+			hello
+			<br>
+			你好，世界
+			<button class="close" id="btn_close">&times;</button>
+		</div>
+		<button class="btn btn-primary" id="btn_show">显示</button>
+	</div>
+	<script>
+		$(function(){
+			$("#btn_close").click(function(){
+				//$(this).parents(".alert").remove();
+				$(this).parents(".alert").alert("close");
+			});
+		$("#btn_show").click(function(){
+			$(`<div class="alert alert-success alert-dismissable">
+			hello
+			<button class="close" id="btn_close">&times;</button>
+		</div>`).prependTo($('body'));
+		});
+		});
+	</script>
+</body>
+</html>

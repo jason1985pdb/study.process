@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+</head>
+<body>
+	
+</body>
+<script>
+	let obj = {"0":"terry","1":"larry","2":"tom"};
+				obj[Symbol.iterator] = function* (){
+				    for(let key in obj){
+				        let val = obj[key];
+				        yield [key,val];
+				    }
+				}
+				obj.entries = obj[Symbol.iterator];
+				let a = obj.entries;
+				let c = a().next();
+				console.log(c);
+</script>
+</html>

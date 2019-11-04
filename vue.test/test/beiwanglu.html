@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>备忘录</title>
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+	<script src="https://cdn.bootcss.com/lodash.js/4.17.15/lodash.js"></script>
+	<style>
+		ul{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		.item{
+			display: flex;
+		}
+		.item > div {
+			flex: 1;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<h2>备忘录</h2>
+		<form action="" @submit.prevent="add">
+			<input type="text" v-model="title">
+			<input type="submit" value="提交">
+		</form>
+		<ul>
+			<li v-for="item in list">
+				<div class="item">
+					<div>{{item.id}}</div>
+					<div>{{item.title}}</div>
+					<div>{{item.status}}</div>
+					<div>
+						<a href="" @click.prevent = "deleteById(item.id)">删除</a>
+						<a href="" @click.prevent="editStatus(item.id)">完成</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</body>
+<script>
+	console.log(_);
+	new Vue({
+		el:"#app",
+		data:{
+			title:"",
+			list:[
+			{id:1,title:"今天天气还不错",status:"未完成"}
+			]
+		},
+		methods:{
+			add(){
+				let id = this.list[this.list.length-1].id+1;
+				let bw = {id,title:this.title,status:"未完成"}
+				this.list.push(bw);
+			},
+			editStatus(id){
+				this.list.forEach((item)=>{
+					if(item.id===id){
+						item.status = "完成"
+					}
+				})
+			},
+			deleteById(id){
+				_.remove(this.list,item=>item.id === id)
+				this.list =_.clone(this.list)
+
+			}
+		}
+	})
+</script>
+</html>

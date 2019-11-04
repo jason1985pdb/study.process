@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>地址管理</title>
+	<link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+	<script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.js"></script> 
+</head>
+<body>
+	<div id="address">
+		<h2>{{name}}</h2>
+		<div>{{address}}</div>
+		<form action="" class="form-inline" v-on:submit.prevent="submitHeadler">
+			<div class="form-group">
+				<label for="">省份</label>
+				<input class="form-control" type="text" v-model="address.province">
+			</div>
+			<div class="form-group">
+				<label for="">城市</label>
+				<input class="form-control" type="text" v-model="address.city">
+			</div>
+			<input btn btn-info type="submit" value="提交">
+		</form>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>编号</th>
+					<th>省份</th>
+					<th>城市</th>
+					<th>地址</th>
+					<th>电话</th>
+					<th>顾客ID</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="item in messages">
+					<td><input type="checkbox" v-bind:value="item.id"></td>
+					<td>{{item.province}}</td>
+					<td>{{item.city}}</td>
+					<td>{{item.address}}</td>
+					<td>{{item.telephone}}</td>
+					<td>{{item.customerID}}</td>
+					<td>
+						<a href="" v-on:click.prevent="deletehandler(item.id)">删除</a>
+						<a href="" v-on:click.prevent="editHandler(item)">修改</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+<script>
+	axios.defaults.headers.common["Content-Type"]="application-x-www-form-urlencoded";
+	axios.defaults.transformRequest = [(data)=>{
+		let str = "";
+		for(let key in data){
+			let val = data[key]
+			str+=(key+"="+val+"&")
+		}
+		return str.slice(0,str.length-1)
+	}]
+	baseURl = "http://123.57.238.144:6677";
+	new Vue({
+		el:"#address",
+		data:{
+			name:"地址管理",
+			messages:[],
+			address:{}
+		},
+		methods:{
+			editHandler(pdb){
+				this.messages = pdb;
+			},
+			async deletehandler(id){
+				let a  = await axios.get(baseURl+"/address/deleteById",{params:{id}})
+				alert(a.data.message);
+				this.reloadData();
+			},
+			async submitHeadler(){
+				let responde = await axios.post(baseURl+"/address/saveOrUpdate",this.address)
+				alert(responde.data.message);
+				this.messages = {};
+				this.reloadData();
+			},
+			reloadData(){
+				axios.get(baseURl+"/address/findAll")
+				.then((res)=>{
+					this.messages = res.data.data;
+				})
+			}
+		},
+		created(){
+			this.reloadData();
+		}
+	})
+</script>
+</html>

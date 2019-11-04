@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>伸缩盒</title>
+	<style>
+		body{
+			margin: 0;
+		}
+		.hezi{
+			height: 100px;
+			width: 500px;
+			background-color: pink;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+		.hezi>.one{
+			background-color: lightblue;
+			flex: 1;
+		}
+		.hezi>.two{
+			background-color: red;
+			flex:2; 
+		}
+		.hezi>.three{
+			background-color: teal;
+			flex: 3;
+	</style>
+</head>
+<body>
+	<div class="hezi">
+		<div class="one"></div>
+		<div class="two"></div>
+		<div class="three"></div>
+	</div>
+</body>
+</html>

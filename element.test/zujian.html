@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件应用</title>
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="pdb">
+		<div>{{messages}}</div>
+		<peng-db title="hello word" type="warning"></peng-db>
+		<peng-db :title="messages" type="success"></peng-db>
+	</div>
+</body>
+<script>
+	let pdb = {
+		template:`
+		<div :style="[style.basic,type==='warning'?style.warning:style.success]">
+			<span>{{title}}</span>
+		</div>
+		`,
+		props:["title","type"],
+		data(){
+			return{
+				style:{
+					basic:{
+						"padding":".5em 1em",
+						"border":"1px solid pink",
+						"border-radius":"3px",
+						"margin-bottom":".5em"
+					},
+					warning:{
+						"border-color":"pink",
+						"color":"pink"	
+					},
+					success:{
+						"border-color":"lightblue",
+						"color":"lightblue"	
+					}
+				}
+			}
+		},
+		methods:{
+
+		}
+	}
+	 // Vue.component("peng-db",pdb)
+	 //  Vue.component("peng-db",pdb)
+	new Vue({
+		el:"#pdb",
+		data:{
+			messages:"better script"
+		},
+		components:{
+			"peng-db":pdb
+		}
+	})
+</script>
+</html>

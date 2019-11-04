@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>栏目管理</title>
+	<link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+	<script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.js"></script> 
+</head>
+<body>
+	<div id="category">
+		<h2>{{name}}</h2>
+		<div>{{category}}</div>
+		<form action="" class="form-inline" v-on:submit.prevent="submitHeadler">
+			<div>
+				姓名<input type="text" v-model="category.name">
+			</div>
+			<div>
+				数量<input type="text" v-model="category.num">
+			</div>
+			<div>
+				分类<input type="text" v-model="category.parentId">
+			</div>
+			<input type="submit" value="提交">
+		</form>
+		<table>
+			<thead>
+				<tr>
+					<th>编号</th>
+					<th>姓名</th>
+					<th>数量</th>
+					<th>图标</th>
+					<th>分类</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="item in message">
+					<td><input type="checkbox" v-bind:value="item.id"></td>
+					<td>{{item.name}}</td>
+					<td>{{item.num}}</td>
+					<td><img :src="item.icon" alt=""></td>
+					<td>{{item.parentId}}</td>
+					<td>
+						<a href="" v-on:click.prevent="deleteHeadler(item.id)">删除</a>
+						<a href="" v-on:click.prevent="editHeadler(item)">修改</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+<script>
+	axios.defaults.headers.common["Content-Type"]="application/x-www-form-urlencoded";
+	axios.defaults.transformRequest = [(data)=>{
+		let str = "";
+		for(let key in data){
+			let val = data[key]
+			str+=(key+"="+val+"&")
+		}
+		return str.slice(0,str.length-1)
+	}]
+	baseUrl="http://123.57.238.144:6677";
+	new Vue({
+		el:"#category",
+		data:{
+			name:"栏目管理",
+			message:[],
+			category:{}
+		},
+		methods:{
+			editHeadler(category){
+				this.category = category;
+			},
+			async deleteHeadler(id){
+				let a = await axios.get(baseUrl+"/category/deleteById?id=" + id)
+				alert(a.data.message)
+				this.reloadDate();
+			},
+			async submitHeadler(){
+				let a = await axios.post(baseUrl+"/category/saveOrUpdate",this.category)
+				alert(a.data.message);
+				this.reloadDate();
+
+			},
+			reloadDate(){
+				axios.get(baseUrl+"/category/findAll")
+				.then((response)=>{
+					this.message = response.data.data;
+				})
+			}
+		},
+		created(){
+			this.reloadDate();
+		}
+	})
+</script>
+</html>

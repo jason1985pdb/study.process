@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>员工管理</title>
+	<link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+	<script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
+</head>
+<body>
+	<div id="waiter">
+		<h2>{{name}}</h2>
+		<form class="form-inline mb-3" action="" v-on:submit.prevent="saveOrUpdate">
+		<!-- 姓名 -->
+			<div class="form-group mr-2">
+				<label for="" class="mr-2">姓名</label>
+				<input type="text" class="form-control" v-model="waiter.realname">
+			</div>
+			<!-- 密码 -->
+			<div class="form-group mr-2">
+				<label for="" class="mr-2">密码</label>
+				<input type="password" class="form-control" v-model="waiter.password">
+			</div>
+			<!-- 电话号码 -->
+			<div class="form-group">
+				<label for="" class="mr-2">电话</label>
+				<input type="text" class="form-control" v-model="waiter.telephone">
+			</div>
+			<input type="submit" class="btn btn-info ml-2" value="提交">
+		</form>
+		<table class="table table-hover">
+			<thead class="thead-light">
+				<tr>
+					<th>id</th>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>手机号</th>
+					<th>注册时间</th>
+					<th>状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody v-for="item in waiters">
+				<tr>
+					<td><input type="checkbox" v-bind:value="item.id"></td>
+					<td>{{item.realname}}</td>
+					<td>{{item.gender}}</td>
+					<td>{{item.telephone}}</td>
+					<td>{{item.registerTime}}</td>
+					<td>{{item.status}}</td>
+					<td>
+						<a href="" v-on:click.prevent="delewaiter(item.id)">删除</a>
+						<a href="" v-on:click.prevent="editwaiter(item)">修改</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script>
+		axios.defaults.baseURL="http://123.57.238.144:6677";
+		axios.defaults.headers.common["Content-Type"]="application/x-www-form-urlencoded";
+		axios.defaults.transformRequest=[(data)=>{
+			let str="";
+			for(key in data){
+				let val = data[key];
+				str+=(key+"="+val+"&");
+			}
+			return str.slice(0,str.length-1);
+		}];
+		new Vue({
+			el:"#waiter",
+			data:{
+				name:"员工管理",
+				waiter:{},
+				waiters:[]
+			},
+			methods:{
+				initwaiter(){
+					axios.get("/waiter/findAll")
+					.then((response)=>{
+						this.waiters=response.data.data
+					})
+				},
+				editwaiter(waiter){
+					this.waiter=waiter;
+				},
+				async saveOrUpdate(){
+					let response = await axios.post("/waiter/saveOrUpdate",this.waiter)
+					alert(response.data.message);
+					this.waiter={};
+					this.initwaiter();
+				},
+				async delewaiter(id){
+					let response = await axios.get("/waiter/deleteById",{params:{id}})
+					alert(response.data.message);
+					this.initwaiter();
+				}
+
+			},
+			created(){
+				this.initwaiter();
+			}
+		})
+	</script>
+</body>
+</html>

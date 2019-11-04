@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>网易严选</title>
+	<style>
+		html{
+			color: #333;
+			font:normal 12px 'Microsoft YaHei';
+		}
+		body{
+			margin: 0;
+		}
+		ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		a {
+			color: #333;
+			text-decoration: none;
+		}
+		
+		.wrapper {
+			width: 1200px;
+			margin: 0 auto;
+		}
+
+		.index {
+			background-color: #333;
+			color: #ededed;
+		}
+		.index a {
+			color: #ededed;
+		}
+		.index .wrapper {
+			line-height: 3em;
+		}
+		.index>.wrapper::after {
+			display: block;
+			content: "";
+			clear: both;
+		}
+		.index .left {
+			float: left;  
+		}
+		.index .right {
+			float: right;
+		}
+		.index .right > ul::after {
+			display: block;
+			content: "";
+			clear: both;
+		}
+		.index .right > ul > li{
+			float: left;
+		}
+		.index .right > ul > li > a{
+			padding: 0 1em;
+			border-right: 1px solid #ededed;
+		}
+		.index .right > ul > li:last-child  > a{
+			border-right: none;
+		}
+		/*search*/
+
+		.search .left {
+			width: 150px;
+			height: 100px;
+			float: left;
+		}
+		.search .center {
+			margin-left: 380px;
+			height: 100px;
+		}
+
+		.search .pdb {
+			padding-top: 30px;
+		}
+		.search .pdb input {
+			width: 280px;
+			border: none;
+		}
+		/* */
+		.search .pdb > li {
+			float: left;
+			line-height: 3rem;
+		}
+		.search .pdb > li:first-child{
+			border-top-left-radius: 1.5em;
+			border-bottom-left-radius: 1.5em;
+			width: 340px;
+			border: 1px solid #b4a078;
+		}
+		.search .pdb > li:last-child{
+			width: 50px;
+			font-size: 16px;
+			color: #fff;
+			background-color:#b4a078;
+			text-align: center;
+			border: 1px solid #b4a078;
+			border-bottom-right-radius: 1.5em; 
+			border-top-right-radius: 1.5em; 
+		}
+		.search .right{
+			float: right;
+			margin-right: 130px;
+			height: 100px;
+		}
+		/*propagate*/
+		.p>ul>li{
+			float: left;
+			margin-left: 5em;
+			margin-top: 5em;
+			font-weight: bold;
+		}
+		.p>ul>li:first-child{
+			margin-left: 125px;
+		}
+		.p>ul::after{
+			content: "";
+			clear: both;
+			display: block;
+		}
+		.p>ul>li:nth-child(9){
+			border-right: 1px solid #ccc;
+			padding-right: 2.5em;
+
+		}
+		.p>ul>li:nth-child(10){
+			margin-left: 2.5em;
+		}
+		/*renqi*/
+		.renqi{
+			background-color: #f4f0ea;
+			height: 50px;
+		}
+		.renqi .left{
+			width: 600px;
+			height: 50px;
+			margin-left: 100px;
+			margin-top: 40px;
+
+		}
+		.renqi .left ul>li{
+			float: left;
+			padding: 0 2em;
+			line-height: 2em;
+		}
+		.renqi .left ul>li:nth-child(1){
+			font-weight: bold;
+			font-size: 20px;
+		}
+		.renqi .left ul>li:nth-child(2){
+			text-decoration-line: underline;
+			padding-top: 1em;
+		}
+		.renqi .left ul>li:nth-child(3){
+			padding-top: 1em;
+		}
+		.renqi .left ul::after{
+			display: block;
+			content: "";
+			clear: both;
+		}
+		.renqi .right{
+			float: right;
+			margin-top: 30px;
+			padding-top: 1em;	
+		}
+		/*style*/
+		.bj{
+			width: 1500px;
+		}
+		.style{
+			background-color:#f4f0ea;
+			padding: 5em 0;
+			height: 600px;
+			margin-top: 0;
+		}
+		.style ul.product>li{
+			float: left;
+			width: 230px;
+			height: 270px;
+			background-color: white;
+			margin-right: 20px;
+			text-align: center;
+		}.style ul::after{
+			content: "";
+			clear: both;
+			display: block;
+		}
+		.style ul.product>li:nth-child(1){
+			width: 450px;
+			height: 560px;
+
+		}
+		.style ul.product>li:nth-child(2),
+		.style ul.product>li:nth-child(3),
+		.style ul.product>li:nth-child(4){
+			margin-bottom: 20px
+		}
+		.style ul.product>li:nth-child(4),
+		.style ul.product>li:nth-child(7){
+			margin-right: 0;
+		}
+		.style ul.product>li:nth-child(6){
+			line-height: 2em;
+		}
+		.style ul.product>li>.picture{
+			height: 70%;
+			border-bottom: 1px solid #ededed;
+		}
+	</style>
+</head>
+<body>
+	<!-- 首栏 -->
+	<div class="index">
+		<!-- 容器1200px,居中 -->
+		<div class="wrapper">
+			<div class="left">用浦发借记卡[满100立减20]可叠加其他优惠</div>
+			<div class="right">
+				<ul>
+					<li><a href="">登录/注册</a></li>
+					<li><a href="">订单</a></li>
+					<li><a href="">会员</a></li>
+					<li><a href="">甄选家</a></li>
+					<li><a href="">企业采购</a></li>
+					<li><a href="">客户服务</a></li>
+					<li><a href="">app</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- 搜索栏 -->
+	<div class="search">
+		<div class="wrapper">
+			<div class="left">
+				<img src="./83.2_03.gif" alt="">
+			</div>
+			<div>
+			<div class="center">
+				<div>
+					<ul class="pdb">
+						<li>
+							<i>ss</i>
+							<input type="text" placeholder="网易智选手持式小风扇">
+						</li>
+						<li>搜索</li>
+					</ul>
+				</div>
+			</div>
+			<div class="right">
+				<div>
+					<img src="">
+					<p>sjakdl</p>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<!-- 宣传栏 -->
+	<div class="p">
+		<ul>
+			<li>首页</li>
+			<li>居家生活</li>
+			<li>服饰鞋包</li>
+			<li>美食酒水</li>
+			<li>个护清洁</li>
+			<li>母婴亲子</li>
+			<li>运动旅行</li>
+			<li>数码家电</li>
+			<li>全球特色</li>
+			<li>为你严选</li>
+			<li>众筹</li>
+		</ul>
+	</div>
+	<div class="picture">
+		<img src="./83.4_02.gif" alt="">
+	</div>
+	<!-- 人气推荐 -->
+	<div class="renqi">
+		<div class="left">
+			<ul>
+				<li>人气推荐</li>
+				<li>编辑推荐</li>
+				<li>热销总榜</li>
+			</ul>
+		</div>
+		<div class="right">
+			<p>更多推荐 ></p>
+		</div>
+	</div>
+	<!-- 样式 -->
+		<div class="style">
+		<div class="wrapper">
+			<ul class="product">
+		        <li>
+		        	<div class="picture">
+		        		<img src="./93.3_05.gif" alt="">
+		        	</div>
+		        	<div>
+			        	<p>
+			        		<span>满折</span>
+			        		<span>App优惠</span>
+			        	</p>
+			        	<p>黑科技吸放湿超冷感垫 夏凉垫可机洗</p>
+			        	<p>￥199</p>
+		            </div>
+		        </li>
+				<li>
+		        	<div class="picture">
+		        		<img src="./100_05.gif" alt="">
+		        	</div>
+		        	<div>
+			        	<p>
+			        		<span>满赠</span>
+			        	</p>
+			        	<p>网易智造强劲交流风扇</p>
+			        	<p>￥199</p>
+		            </div>
+		        </li>
+		            <li>
+		        	<div class="picture">
+		        		<img src="./09.gif" alt="">
+		        	</div>
+		        	<div>
+			        	<p>
+			        		<span>好货内部价</span>
+			        	</p>
+			        	<p>蔬菜风味牛奶面包 紫米味 360克</p>
+			        	<p>￥219</p>
+		            </div>
+		        </li>
+		        <li>
+		        	<div class="picture">
+		        		<img src="./05.gif" alt="">
+		        	</div>
+		        	<div>
+			        	<p>
+			        		<span>满折</span>
+			        	</p>
+			        	<p>全净皓齿变速式声波电动牙刷</p>
+			        	<p>￥219</p>
+		            </div>
+		        </li>
+		        <li>
+		        	<div class="picture">
+		        		<img src="./13.gif" alt="">
+		        	</div>
+		        	<div>
+			        	<p>
+			        		<span>满折</span>
+			        	</p>
+			        	<p>三头浮动式电动剃须刀</p>
+			        	<p>￥139</p>
+		            </div>
+		        </li>
+		        <li>
+		        	<div class="picture">
+		        		<img src="./14.gif" alt="">
+		        	</div>
+		        	<div>
+			        	<p>
+			        	</p>
+			        	<p>女式Classic蓝宝石镜面手表</p>
+			        	<p>￥199</p>
+		            </div>
+		        </li>
+		        <li>
+		        	<div class="picture">
+		        		<img src="./16.gif" alt="">
+		        	</div>
+		        	<div>
+			        	
+			        	<p>网易智造3D揉捏按摩肩带</p>
+			        	<p>￥449</p>
+		            </div>
+		        </li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

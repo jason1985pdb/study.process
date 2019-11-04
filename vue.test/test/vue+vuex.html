@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>备忘录</title>
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+	<script src="https://cdn.bootcss.com/lodash.js/4.17.15/lodash.js"></script>
+	<script src="https://cdn.bootcss.com/vuex/3.1.1/vuex.js"></script>
+	<style>
+		ul{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		.item{
+			display: flex;
+		}
+		.item > div {
+			flex: 1;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<h2>备忘录</h2>
+		<form action="" @submit.prevent="addHandler">
+			<input type="text" v-model="title">
+			<input type="submit" value="提交">
+		</form>
+		<ul>
+			<li v-for="item in list">
+				<div class="item">
+					<div>{{item.id}}</div>
+					<div>{{item.title}}</div>
+					<div>{{item.status}}</div>
+					<div>
+						<a href="" @click.prevent = "deleteByIdHandler(item.id)">删除</a>
+						<a href="" @click.prevent="editStatusHandler(item.id)">完成</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</body>
+<script>
+	let store = new Vuex.Store({
+		state:{
+			list:[
+			{id:1,title:"今天天气还不错",status:"未完成"}
+			]
+		},
+		getters:{
+
+		},
+		mutations:{
+			add(state,title){
+				let id = state.list[state.list.length-1].id+1;
+				let bw = {id,title,status}
+				state.list.push(bw);
+			},
+			editStatus(state,id){
+				state.list.forEach((item)=>{
+					if(item.id===id){
+						item.status = "完成"
+					}
+				})
+			},
+
+			deleteById(state,id){
+				_.remove(state.list,item=>item.id === id)
+				state.list =_.clone(state.list)
+
+			}
+		},
+		actions:{
+
+		}
+	})
+	new Vue({
+		el:"#app",
+		store,
+		data:{
+			title:""	
+		},
+		computed:{
+			list:function(){
+				return this.$store.state.list;
+			}
+		},
+		methods:{
+			addHandler(){
+				this.$store.commit('add',this.title)
+			},
+			deleteByIdHandler(id){
+				this.$store.commit('deleteById',id)
+			},
+			editStatusHandler(id){
+				this.$store.commit('editStatus',id)	
+			}
+		}
+	})
+</script>
+</html>
